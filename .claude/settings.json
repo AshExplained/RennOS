@@ -1,0 +1,19 @@
+{
+  "autoMemoryEnabled": false,
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_TASK_LIST_ID": "rennos"
+  },
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Grep",
+      "Glob",
+      "WebSearch",
+      "WebFetch",
+      "Agent(*)"
+    ]
+  }
+}
