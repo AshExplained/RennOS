@@ -30,5 +30,4 @@ A personal brand management + life management system powered by Claude Code.
 - All agents produce drafts — the user approves before anything goes live
 
 ## Docs
-- `docs/ARCHITECTURE.md` — System design
 - `docs/claude-code-meta.md` — Claude Code feature reference

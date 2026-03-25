@@ -99,7 +99,7 @@
 | `formatting.py` | `markdown_table()`, `section_header()`, `summary_block()` | Revenue dashboard, weekly digest, status report |
 
 ### `scripts/tools/` — Standalone CLI Tools
-Run via Bash by Tony or any agent with shell access. Example: `python3 scripts/tools/data_freshness.py`
+Run via Bash by the CEO agent or any agent with shell access. Example: `python3 scripts/tools/data_freshness.py`
 
 *(Empty — tools will be added here as needed: brand_check, data_freshness, vault_file)*
 
@@ -111,7 +111,7 @@ All scripts live under `scripts/` organized by department. Run with `python3 -m 
 |---|---|---|---|
 | `aggregate_metrics.py` | `python3 -m scripts.analytics.aggregate_metrics` | Scans all `data/` departments, lists files with freshness labels, prints data availability summary | @performance-analyst |
 | `compile_weekly_data.py` | `python3 -m scripts.analytics.compile_weekly_data` | Pulls most recent file from each key department with 3-line preview | @performance-analyst |
-| `project_status_scan.py` | `python3 -m scripts.ops.project_status_scan` | Scans `data/` for files modified in last 7 days + reads active_projects.md | @project-coordinator, Tony |
+| `project_status_scan.py` | `python3 -m scripts.ops.project_status_scan` | Scans `data/` for files modified in last 7 days + reads active_projects.md | @project-coordinator, CEO agent |
 | `list_available_content.py` | `python3 -m scripts.social.list_available_content` | Lists files in `data/content/drafts/` and `data/social/` ready for scheduling | @content-scheduler |
 | `revenue_summary.py` | `python3 -m scripts.finance.revenue_summary` | Parses `data/finance/` for revenue files, extracts currency amounts and income streams | @income-tracker |
 | `payment_status.py` | `python3 -m scripts.finance.payment_status` | Scans `data/finance/` for payment/invoice files and their status | @invoice-payments-manager |

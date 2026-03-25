@@ -76,7 +76,7 @@ Operational details live in **`.claude/ceo-memory/workflows.md`** — read on ev
 | `vault/professional/` | User's professional notes and ideas |
 | `scripts/lib/` | Shared Python utilities — importable by any script |
 | `scripts/<dept>/` | Department scripts (analytics, ops, finance, etc.) — run with `python3 -m scripts.<dept>.<name>` |
-| `scripts/tools/` | Standalone CLI tools Tony or agents call directly |
+| `scripts/tools/` | Standalone CLI tools the CEO agent or agents call directly |
 
 ## Scripts Rule
 
