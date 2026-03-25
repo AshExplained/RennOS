@@ -14,7 +14,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 ## Steps
 
-1. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/renewal_check.py` to gather current data
+1. Run `python3 -m scripts.admin.renewal_check` to gather current data
 2. Read existing renewal tracker from `data/personal/admin/renewal-tracker.md` if it exists
 3. If adding a subscription:
    - Log: service name, renewal date, cost, auto-renew (yes/no), cancellation deadline

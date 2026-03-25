@@ -16,7 +16,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 ## Steps
 
-1. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/calendar_conflict_check.py` to gather current data
+1. Run `python3 -m scripts.ops.calendar_conflict_check` to gather current data
 2. Read master calendar, content calendar, and PR calendar files
 3. Scan for conflicts:
    - **Date conflicts** — Multiple events/deadlines on the same day that require the user's attention

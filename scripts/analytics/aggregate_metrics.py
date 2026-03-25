@@ -5,61 +5,9 @@ Lists what data is available per department with file names and last
 modified dates. Summarizes data freshness.
 """
 
-import os
-from datetime import datetime, timedelta
-from pathlib import Path
-
-REPO_ROOT = Path(__file__).resolve().parents[5]
-DATA_DIR = REPO_ROOT / "data"
-
-FRESHNESS_THRESHOLDS = {
-    "fresh": 3,       # days - updated in last 3 days
-    "recent": 7,      # days - updated in last week
-    "stale": 30,      # days - updated in last month
-    # anything older is "outdated"
-}
-
-
-def freshness_label(days_old: int) -> str:
-    """Return a freshness label based on age in days."""
-    if days_old <= FRESHNESS_THRESHOLDS["fresh"]:
-        return "FRESH"
-    elif days_old <= FRESHNESS_THRESHOLDS["recent"]:
-        return "RECENT"
-    elif days_old <= FRESHNESS_THRESHOLDS["stale"]:
-        return "STALE"
-    else:
-        return "OUTDATED"
-
-
-def scan_department(dept_dir: Path) -> list[dict]:
-    """Scan a department directory for files, return file info."""
-    files = []
-    if not dept_dir.is_dir():
-        return files
-
-    for item in sorted(dept_dir.rglob("*")):
-        if not item.is_file():
-            continue
-        if item.name in (".gitkeep", ".DS_Store"):
-            continue
-
-        stat = item.stat()
-        mod_time = datetime.fromtimestamp(stat.st_mtime)
-        days_old = (datetime.now() - mod_time).days
-
-        files.append({
-            "name": item.name,
-            "path": str(item.relative_to(REPO_ROOT)),
-            "modified": mod_time.strftime("%Y-%m-%d %H:%M"),
-            "days_old": days_old,
-            "freshness": freshness_label(days_old),
-            "size": stat.st_size,
-        })
-
-    return files
-
-
+import sys
+from scripts.lib.paths import DATA_DIR
+from scripts.lib.data_scanner import scan_directory, list_departments
 def main():
     print("=" * 70)
     print("KPI DATA AVAILABILITY - DEPARTMENT SCAN")
@@ -70,10 +18,9 @@ def main():
         print("No department data available yet.")
         return
 
-    # Find all department subdirs
-    dept_dirs = sorted([d for d in DATA_DIR.iterdir() if d.is_dir() and d.name != ".DS_Store"])
+    dept_names = list_departments()
 
-    if not dept_dirs:
+    if not dept_names:
         print("\nNo department directories found in data/")
         print("Tip: Create directories like data/analytics/, data/content/, etc.")
         return
@@ -81,9 +28,9 @@ def main():
     dept_summaries = []
     total_files = 0
 
-    for dept_dir in dept_dirs:
-        dept_name = dept_dir.name
-        files = scan_department(dept_dir)
+    for dept_name in dept_names:
+        dept_dir = DATA_DIR / dept_name
+        files = scan_directory(dept_dir)
 
         print(f"\n--- {dept_name}/ ---")
 
@@ -139,7 +86,5 @@ def main():
             print(f"    - {s['name']}")
 
     print(f"{'=' * 70}")
-
-
 if __name__ == "__main__":
     main()

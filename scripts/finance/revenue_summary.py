@@ -6,16 +6,13 @@ Handles the case where no data exists yet.
 """
 
 import re
+import sys
 from datetime import datetime
 from pathlib import Path
-
-REPO_ROOT = Path(__file__).resolve().parents[5]
-FINANCE_DIR = REPO_ROOT / "data" / "finance"
+from scripts.lib.paths import REPO_ROOT, FINANCE_DIR
 
 # Keywords that identify revenue-related files
 REVENUE_KEYWORDS = ["revenue", "income", "earnings", "sales", "invoice", "payment", "billing"]
-
-
 def find_revenue_files(finance_dir: Path) -> list:
     """Find all files in the finance directory."""
     files = []
@@ -30,8 +27,6 @@ def find_revenue_files(finance_dir: Path) -> list:
         files.append(item)
 
     return sorted(files)
-
-
 def extract_currency_amounts(text: str) -> list:
     """Extract currency amounts from text, return list of (context, amount)."""
     amounts = []
@@ -48,8 +43,6 @@ def extract_currency_amounts(text: str) -> list:
             continue
 
     return amounts
-
-
 def parse_markdown_table(content: str) -> list:
     """Parse markdown tables from content."""
     lines = content.split("\n")
@@ -85,8 +78,6 @@ def parse_markdown_table(content: str) -> list:
         tables.append(row)
 
     return tables
-
-
 def analyze_revenue_file(filepath: Path) -> dict:
     """Analyze a single revenue file and extract what we can."""
     info = {
@@ -135,8 +126,6 @@ def analyze_revenue_file(filepath: Path) -> dict:
             info["streams"][stream_name] = info["streams"].get(stream_name, 0) + amount
 
     return info
-
-
 def main():
     print("=" * 70)
     print("REVENUE SUMMARY")
@@ -220,7 +209,5 @@ def main():
             print("  Note: Could not categorize by stream. Add structured tables for better analysis.")
 
     print(f"\n{'=' * 70}")
-
-
 if __name__ == "__main__":
     main()

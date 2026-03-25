@@ -17,7 +17,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 ## Steps
 
 1. Use `${CLAUDE_SKILL_DIR}/template.md` as the output format
-2. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/revenue_summary.py` to gather current data
+2. Run `python3 -m scripts.finance.revenue_summary` to gather current data
 3. Read existing revenue dashboard and revenue history
 4. If new revenue data provided in $ARGUMENTS, incorporate it
 5. Update the dashboard:

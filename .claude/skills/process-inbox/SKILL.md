@@ -16,10 +16,18 @@ Uses the **Obsidian CLI** (`obsidian`) for all vault operations — reading, tag
 
 ## Steps
 
-1. List clippings in inbox:
+0. **Pre-flight: Check Obsidian CLI is available.**
+   Run a lightweight command to verify the Obsidian app is running and the CLI can connect:
    ```bash
-   obsidian files folder="inbox" vault="vault"
+   obsidian version 2>&1
    ```
+   - If it returns a version number → proceed normally using Obsidian CLI.
+   - If it returns `"Unable to connect to main process"` → **Obsidian is not running.** Tell the user: "Obsidian needs to be open for CLI commands. Open Obsidian.app and I'll retry." Do NOT proceed with CLI commands. Instead, fall back to **filesystem mode**: use `ls`, `Read`, `Edit`, `Write`, and `mv` to process clippings directly. Frontmatter tagging via `obsidian property:set` is skipped in filesystem mode — use the Edit tool to write YAML frontmatter directly instead.
+   - **Known macOS issue:** After quitting and relaunching Obsidian, the CLI sometimes stops connecting. Fix: Settings → General → CLI → toggle off/on → click Register again.
+
+1. List clippings in inbox:
+   - **CLI mode:** `obsidian files folder="inbox" vault="vault"`
+   - **Filesystem mode:** `ls vault/inbox/` (ignore `.gitkeep`)
    If no files found (or only `.gitkeep`), report "Inbox is empty" and stop.
 
 2. For each clipping file, read its content:

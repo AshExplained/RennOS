@@ -10,9 +10,7 @@ import os
 import re
 import sys
 from datetime import datetime, timedelta
-
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../.."))
-DATA_DIR = os.path.join(REPO_ROOT, "data")
+from scripts.lib.paths import REPO_ROOT, DATA_DIR
 TODAY = datetime.now().date()
 
 DATE_PATTERN = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
@@ -24,15 +22,11 @@ DEADLINE_KEYWORDS = [
     "submit", "review", "milestone", "ship", "complete", "expire",
     "renewal", "renew", "cancel",
 ]
-
-
 def parse_date(s):
     try:
         return datetime.strptime(s.strip(), "%Y-%m-%d").date()
     except (ValueError, AttributeError):
         return None
-
-
 def scan_file(filepath):
     """Scan a file for date references and return deadline items."""
     items = []
@@ -71,8 +65,6 @@ def scan_file(filepath):
             })
 
     return items
-
-
 def main():
     print("=" * 70)
     print("DEADLINE SCANNER")
@@ -202,7 +194,5 @@ def main():
         print(f"[!] HEADS UP: {len(urgent)} item(s) due within 7 days.")
 
     print()
-
-
 if __name__ == "__main__":
     main()

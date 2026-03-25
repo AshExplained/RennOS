@@ -6,11 +6,11 @@ and checks if derivatives exist in data/social/ or other data/content/ subdirs.
 """
 
 import os
+import sys
 from datetime import datetime
 from pathlib import Path
+from scripts.lib.paths import REPO_ROOT, CONTENT_DIR
 
-REPO_ROOT = Path(__file__).resolve().parents[5]
-CONTENT_DIR = REPO_ROOT / "data" / "content"
 SOCIAL_DIR = REPO_ROOT / "data" / "social"
 
 # Map extensions to format labels
@@ -51,8 +51,6 @@ TYPE_HINTS = {
     "outline": "Outline",
     "draft": "Draft",
 }
-
-
 def infer_format(filepath: Path) -> str:
     """Infer content format from file extension and name."""
     name_lower = filepath.stem.lower().replace("-", " ").replace("_", " ")
@@ -65,8 +63,6 @@ def infer_format(filepath: Path) -> str:
     # Fall back to extension
     ext = filepath.suffix.lower()
     return FORMAT_MAP.get(ext, f"Unknown ({ext})" if ext else "Unknown")
-
-
 def find_derivatives(source_stem: str, all_files: list[Path]) -> list[str]:
     """Check if derivatives of a source content piece exist elsewhere."""
     derivatives = []
@@ -79,8 +75,6 @@ def find_derivatives(source_stem: str, all_files: list[Path]) -> list[str]:
             derivatives.append(str(f.relative_to(REPO_ROOT)))
 
     return derivatives
-
-
 def main():
     print("=" * 70)
     print("CONTENT INVENTORY SCAN")
@@ -145,7 +139,5 @@ def main():
     if total > 0 and total_with_derivatives == 0:
         print("Tip: No derivatives detected. Consider repurposing source content into social posts.")
     print("=" * 70)
-
-
 if __name__ == "__main__":
     main()

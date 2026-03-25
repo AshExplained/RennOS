@@ -6,14 +6,13 @@ status breakdown (sent/responded/declined/no-response).
 """
 
 import re
+import sys
 from datetime import datetime, timedelta
 from pathlib import Path
+from scripts.lib.paths import REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[5]
 TRACKER_PATH = REPO_ROOT / "data" / "pr" / "outreach-tracker.md"
 FOLLOWUP_THRESHOLD_DAYS = 7
-
-
 def parse_table_rows(content: str) -> list[dict]:
     """Parse markdown table rows into list of dicts.
 
@@ -56,8 +55,6 @@ def parse_table_rows(content: str) -> list[dict]:
         rows.append(row)
 
     return rows
-
-
 def find_status_column(rows: list[dict]) -> str:
     """Find which column contains status information."""
     status_keywords = ["status", "state", "result", "response"]
@@ -68,8 +65,6 @@ def find_status_column(rows: list[dict]) -> str:
             if keyword in key:
                 return key
     return ""
-
-
 def find_date_column(rows: list[dict]) -> str:
     """Find which column contains date information."""
     date_keywords = ["date", "pitched", "sent", "when"]
@@ -80,8 +75,6 @@ def find_date_column(rows: list[dict]) -> str:
             if keyword in key:
                 return key
     return ""
-
-
 def parse_date(date_str: str):
     """Try to parse a date string in common formats."""
     formats = ["%Y-%m-%d", "%m/%d/%Y", "%d/%m/%Y", "%B %d, %Y", "%b %d, %Y",
@@ -92,8 +85,6 @@ def parse_date(date_str: str):
         except ValueError:
             continue
     return None
-
-
 def main():
     print("=" * 70)
     print("OUTREACH TRACKER STATISTICS")
@@ -189,7 +180,5 @@ def main():
             print(f"  {item['contact']:<30} {item['date']:<14} {item['days_ago']} days")
 
     print(f"\n{'=' * 70}")
-
-
 if __name__ == "__main__":
     main()

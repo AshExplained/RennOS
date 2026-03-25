@@ -10,38 +10,32 @@ import os
 import re
 import sys
 from datetime import datetime
+from scripts.lib.paths import REPO_ROOT, DATA_DIR
 
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../.."))
 TODAY = datetime.now().date()
 
 SEARCH_DIRS = [
-    os.path.join(REPO_ROOT, "data", "personal", "admin"),
-    os.path.join(REPO_ROOT, "data", "operations", "admin"),
-    os.path.join(REPO_ROOT, "data", "operations"),
-    os.path.join(REPO_ROOT, "data", "admin"),
+    os.path.join(DATA_DIR, "personal", "admin"),
+    os.path.join(DATA_DIR, "operations", "admin"),
+    os.path.join(DATA_DIR, "operations"),
+    os.path.join(DATA_DIR, "admin"),
 ]
 
 TABLE_ROW_PATTERN = re.compile(r"^\|(.+)\|$")
 SEPARATOR_PATTERN = re.compile(r"^\|[\s\-:]+\|$")
 COST_PATTERN = re.compile(r"\$?\s*([\d,]+(?:\.\d{1,2})?)")
 DATE_PATTERN = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
-
-
 def parse_date(s):
     try:
         return datetime.strptime(s.strip(), "%Y-%m-%d").date()
     except (ValueError, AttributeError):
         return None
-
-
 def parse_cost(s):
     """Extract a numeric cost from a string like '$9.99' or '29.99/mo'."""
     m = COST_PATTERN.search(s)
     if m:
         return float(m.group(1).replace(",", ""))
     return None
-
-
 def normalize_to_monthly(cost, raw_text):
     """Attempt to normalize a cost to monthly based on context clues."""
     raw = raw_text.lower()
@@ -50,8 +44,6 @@ def normalize_to_monthly(cost, raw_text):
     if "year" in raw or "annual" in raw or "/yr" in raw or "/y" in raw:
         return round(cost / 12, 2)
     return cost
-
-
 def scan_file_for_subscriptions(filepath):
     """Parse a markdown file for subscription table data."""
     subscriptions = []
@@ -94,8 +86,6 @@ def scan_file_for_subscriptions(filepath):
             subscriptions.append(row)
 
     return subscriptions
-
-
 def extract_sub_fields(row):
     """Extract name, cost, and renewal date from a subscription row."""
     name = None
@@ -140,8 +130,6 @@ def extract_sub_fields(row):
                 break
 
     return name, cost_val, renewal_date, cost_str
-
-
 def scan_for_subscription_keywords(filepath):
     """Scan file for lines mentioning subscriptions with costs."""
     items = []
@@ -164,8 +152,6 @@ def scan_for_subscription_keywords(filepath):
                 "file": os.path.basename(filepath),
             })
     return items
-
-
 def main():
     print("=" * 60)
     print("SUBSCRIPTION SUMMARY")
@@ -262,7 +248,5 @@ def main():
         print("    Format: | Service | Monthly Cost | Renewal Date | Auto-Renew | Status |")
 
     print()
-
-
 if __name__ == "__main__":
     main()

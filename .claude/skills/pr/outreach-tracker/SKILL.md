@@ -17,7 +17,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 ## Steps
 
-1. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/outreach_stats.py` to gather current data
+1. Run `python3 -m scripts.pr.outreach_stats` to gather current data
 2. Read existing outreach tracker from `data/pr/outreach-tracker.md` if it exists
 3. Use `${CLAUDE_SKILL_DIR}/template.md` as the output format
 4. If logging new outreach:

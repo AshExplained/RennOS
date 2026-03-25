@@ -17,7 +17,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 ## Steps
 
-1. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/deadline_scanner.py` to gather current data
+1. Run `python3 -m scripts.ops.deadline_scanner` to gather current data
 2. Read task tracker, master calendar, content calendar, and PR calendar files
 3. Extract all items with deadlines within the specified time window
 4. Categorize:

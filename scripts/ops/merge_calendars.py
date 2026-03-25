@@ -10,23 +10,17 @@ import os
 import re
 import sys
 from datetime import datetime
-
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../.."))
-DATA_DIR = os.path.join(REPO_ROOT, "data")
+from scripts.lib.paths import REPO_ROOT, DATA_DIR
 TODAY = datetime.now().date()
 
 DATE_PATTERN = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
 TABLE_ROW_PATTERN = re.compile(r"^\|(.+)\|$")
 SEPARATOR_PATTERN = re.compile(r"^\|[\s\-:]+\|$")
-
-
 def parse_date(s):
     try:
         return datetime.strptime(s.strip(), "%Y-%m-%d").date()
     except (ValueError, AttributeError):
         return None
-
-
 def find_calendar_files(data_dir):
     """Recursively find files with 'calendar' in the name under data/."""
     calendar_files = []
@@ -40,8 +34,6 @@ def find_calendar_files(data_dir):
                 calendar_files.append(os.path.join(root, f))
 
     return sorted(calendar_files)
-
-
 def extract_events_from_table(filepath):
     """Extract events from markdown tables in a file."""
     events = []
@@ -107,8 +99,6 @@ def extract_events_from_table(filepath):
                 })
 
     return events
-
-
 def extract_events_from_lines(filepath):
     """Extract date-referenced events from non-table content."""
     events = []
@@ -138,8 +128,6 @@ def extract_events_from_lines(filepath):
                 })
 
     return events
-
-
 def main():
     print("=" * 70)
     print("MERGED CALENDAR VIEW")
@@ -219,7 +207,5 @@ def main():
 
     print(f"\nTotal events across all calendars: {len(all_events)}")
     print()
-
-
 if __name__ == "__main__":
     main()

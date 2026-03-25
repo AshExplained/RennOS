@@ -11,9 +11,7 @@ import re
 import sys
 from collections import defaultdict
 from datetime import datetime
-
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../.."))
-DATA_DIR = os.path.join(REPO_ROOT, "data")
+from scripts.lib.paths import REPO_ROOT, DATA_DIR
 TODAY = datetime.now().date()
 
 DATE_PATTERN = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
@@ -21,15 +19,11 @@ TABLE_ROW_PATTERN = re.compile(r"^\|(.+)\|$")
 SEPARATOR_PATTERN = re.compile(r"^\|[\s\-:]+\|$")
 
 SKIP_DIRS = {"archive", ".git", "node_modules", "__pycache__"}
-
-
 def parse_date(s):
     try:
         return datetime.strptime(s.strip(), "%Y-%m-%d").date()
     except (ValueError, AttributeError):
         return None
-
-
 def find_schedule_files(data_dir):
     """Find files with calendar/schedule/roadmap keywords."""
     files = []
@@ -42,8 +36,6 @@ def find_schedule_files(data_dir):
             if any(kw in f.lower() for kw in keywords) and f.endswith(".md"):
                 files.append(os.path.join(root, f))
     return sorted(set(files))
-
-
 def extract_events(filepath):
     """Extract all dated events from a file."""
     events = []
@@ -127,8 +119,6 @@ def extract_events(filepath):
     if table_events:
         return table_events
     return events
-
-
 def main():
     print("=" * 70)
     print("CALENDAR CONFLICT CHECK")
@@ -254,7 +244,5 @@ def main():
         print(f"Last scheduled event:    {future_dates[-1]}")
 
     print()
-
-
 if __name__ == "__main__":
     main()

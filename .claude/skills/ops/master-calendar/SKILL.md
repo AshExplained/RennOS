@@ -18,7 +18,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 ## Steps
 
-1. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/merge_calendars.py` to gather current data
+1. Run `python3 -m scripts.ops.merge_calendars` to gather current data
 2. Read existing master calendar from `data/operations/master-calendar.md`
 3. If adding a new event:
    - Add entry: date, event/milestone, department, type (content/PR/launch/event/personal), status

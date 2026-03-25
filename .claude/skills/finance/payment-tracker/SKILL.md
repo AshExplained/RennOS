@@ -14,7 +14,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 ## Steps
 
-1. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/payment_status.py` to gather current data
+1. Run `python3 -m scripts.finance.payment_status` to gather current data
 2. Read existing payment tracker from `data/finance/` if it exists
 3. If logging a new payment or invoice:
    - Add entry: client, invoice number, amount, date issued, due date, status (pending/paid/overdue)

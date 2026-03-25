@@ -74,6 +74,20 @@ Operational details live in **`.claude/ceo-memory/workflows.md`** — read on ev
 | `vault/inbox/` | Unprocessed web clippings |
 | `vault/personal/` | User's personal knowledge (health, goals, etc.) |
 | `vault/professional/` | User's professional notes and ideas |
+| `scripts/lib/` | Shared Python utilities — importable by any script |
+| `scripts/<dept>/` | Department scripts (analytics, ops, finance, etc.) — run with `python3 -m scripts.<dept>.<name>` |
+| `scripts/tools/` | Standalone CLI tools Tony or agents call directly |
+
+## Scripts Rule
+
+**All scripts live in `scripts/` — NEVER create scripts inside `.claude/skills/`.**
+
+- `scripts/lib/` — shared importable modules (paths, data scanning, frontmatter, formatting)
+- `scripts/<dept>/` — department scripts organized by function (analytics, ops, finance, admin, pr, social, content)
+- `scripts/tools/` — standalone CLI tools any agent can run
+- Skills (`.claude/skills/`) are **markdown playbooks only** — instructions, not code. They reference scripts via `python3 -m scripts.<dept>.<name>`
+- When creating a new script, check `scripts/lib/` first — import shared utilities, don't duplicate them
+- Run scripts with `python3 -m scripts.<dept>.<name>` from repo root (not `python3 scripts/<dept>/<name>.py`)
 
 ## Rules
 

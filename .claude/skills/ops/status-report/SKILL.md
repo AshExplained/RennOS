@@ -17,7 +17,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 ## Steps
 
 1. Use `${CLAUDE_SKILL_DIR}/template.md` as the output format
-2. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/project_status_scan.py` to gather current data
+2. Run `python3 -m scripts.ops.project_status_scan` to gather current data
 3. Read active projects, task tracker, and quarterly roadmap
 4. Scan recent activity across `data/` directories (check file modification dates)
 5. For each active project/initiative:

@@ -32,12 +32,15 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 ## Output
 
-Create the goal in Obsidian using the CLI:
+**Pre-flight:** Run `obsidian version 2>&1` to check if the Obsidian CLI is available. If it returns `"Unable to connect to main process"`, tell the user to open Obsidian.app first, then fall back to filesystem mode (use Write tool to create the file directly at `vault/personal/goals/goal-[name]-[date].md` with YAML frontmatter written inline).
+
+**CLI mode** (Obsidian running):
 ```bash
 obsidian create path="personal/goals/goal-[name]-[date].md" content="[goal content with frontmatter]" vault="vault"
-```
-Tag it for easy discovery:
-```bash
 obsidian property:set path="personal/goals/goal-[name]-[date].md" name="tags" value="[goal, area-tag]" type=list vault="vault"
 ```
+
+**Filesystem mode** (Obsidian not running):
+Use the Write tool to create `vault/personal/goals/goal-[name]-[date].md` with frontmatter and content directly.
+
 - Update your MEMORY.md with the new goal and its connection to the user's broader vision

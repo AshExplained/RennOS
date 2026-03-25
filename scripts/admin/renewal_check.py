@@ -10,41 +10,35 @@ import os
 import re
 import sys
 from datetime import datetime, timedelta
+from scripts.lib.paths import REPO_ROOT, DATA_DIR
 
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../.."))
 TODAY = datetime.now().date()
 
 SEARCH_DIRS = [
-    os.path.join(REPO_ROOT, "data", "personal", "admin"),
-    os.path.join(REPO_ROOT, "data", "operations", "admin"),
-    os.path.join(REPO_ROOT, "data", "admin"),
+    os.path.join(DATA_DIR, "personal", "admin"),
+    os.path.join(DATA_DIR, "operations", "admin"),
+    os.path.join(DATA_DIR, "admin"),
 ]
 
 RENEWAL_FILES = [
-    os.path.join(REPO_ROOT, "data", "personal", "admin", "renewal-tracker.md"),
-    os.path.join(REPO_ROOT, "data", "operations", "admin", "renewal-tracker.md"),
+    os.path.join(DATA_DIR, "personal", "admin", "renewal-tracker.md"),
+    os.path.join(DATA_DIR, "operations", "admin", "renewal-tracker.md"),
 ]
 
 DATE_PATTERN = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
 TABLE_ROW_PATTERN = re.compile(r"^\|(.+)\|$")
 SEPARATOR_PATTERN = re.compile(r"^\|[\s\-:]+\|$")
 COST_PATTERN = re.compile(r"\$?\s*([\d,]+(?:\.\d{1,2})?)")
-
-
 def parse_date(s):
     try:
         return datetime.strptime(s.strip(), "%Y-%m-%d").date()
     except (ValueError, AttributeError):
         return None
-
-
 def parse_cost(s):
     m = COST_PATTERN.search(s)
     if m:
         return float(m.group(1).replace(",", ""))
     return None
-
-
 def scan_file_for_renewals(filepath):
     """Parse markdown file for renewal/subscription table rows."""
     renewals = []
@@ -88,8 +82,6 @@ def scan_file_for_renewals(filepath):
             renewals.append(row)
 
     return renewals
-
-
 def scan_file_for_date_refs(filepath):
     """Scan file for lines with dates and renewal-related keywords."""
     items = []
@@ -120,8 +112,6 @@ def scan_file_for_date_refs(filepath):
                     })
 
     return items
-
-
 def extract_renewal_info(row):
     """Extract service name, renewal date, cost, and auto-renew from a row."""
     name = None
@@ -168,8 +158,6 @@ def extract_renewal_info(row):
                 break
 
     return name, renewal_date, cost, auto_renew, cancel_deadline
-
-
 def main():
     print("=" * 60)
     print("RENEWAL CHECK")
@@ -359,7 +347,5 @@ def main():
         print("    | Service | Renewal Date | Cost | Auto-Renew | Cancel Deadline |")
 
     print()
-
-
 if __name__ == "__main__":
     main()

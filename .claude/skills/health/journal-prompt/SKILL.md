@@ -25,12 +25,18 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 ## Output
 
-Create the journal entry in Obsidian using the CLI:
+**Pre-flight:** Run `obsidian version 2>&1` to check if the Obsidian CLI is available. If it returns `"Unable to connect to main process"`, tell the user to open Obsidian.app first, then fall back to filesystem mode (use Write tool to create the file directly with YAML frontmatter written inline).
+
+**CLI mode** (Obsidian running):
 ```bash
 obsidian create path="personal/journal/prompt-[date].md" content="[prompt content with frontmatter]" vault="vault"
 ```
-Or if you prefer to use the daily note:
+Or use the daily note:
 ```bash
 obsidian daily:append content="## Journal Prompt\n[prompt content]" vault="vault"
 ```
+
+**Filesystem mode** (Obsidian not running):
+Use the Write tool to create `vault/personal/journal/prompt-[date].md` with frontmatter and content directly. Daily note append is not available in filesystem mode — create a standalone file instead.
+
 - Update your MEMORY.md with prompt themes used

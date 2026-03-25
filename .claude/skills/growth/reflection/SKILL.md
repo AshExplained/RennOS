@@ -31,12 +31,15 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 ## Output
 
-Create the reflection in Obsidian using the CLI:
+**Pre-flight:** Run `obsidian version 2>&1` to check if the Obsidian CLI is available. If it returns `"Unable to connect to main process"`, tell the user to open Obsidian.app first, then fall back to filesystem mode (use Write tool to create the file directly at `vault/personal/goals/reflection-[date].md` with YAML frontmatter written inline).
+
+**CLI mode** (Obsidian running):
 ```bash
 obsidian create path="personal/goals/reflection-[date].md" content="[reflection content with frontmatter]" vault="vault"
-```
-Tag it for easy discovery:
-```bash
 obsidian property:set path="personal/goals/reflection-[date].md" name="tags" value="[reflection, period-tag]" type=list vault="vault"
 ```
+
+**Filesystem mode** (Obsidian not running):
+Use the Write tool to create `vault/personal/goals/reflection-[date].md` with frontmatter and content directly.
+
 - Update your MEMORY.md with key insights and any action items identified

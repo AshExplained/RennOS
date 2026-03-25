@@ -19,7 +19,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 
 1. Read `${CLAUDE_SKILL_DIR}/references/best-practices.md` for KPI definitions and benchmarks
 2. Use `${CLAUDE_SKILL_DIR}/template.md` as the output format
-3. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/aggregate_metrics.py` to gather current data
+3. Run `python3 -m scripts.analytics.aggregate_metrics` to gather current data
 4. Read existing KPI dashboard and all available department data
 5. If metrics data provided in $ARGUMENTS, use that. Otherwise, compile from available files.
 6. Update the dashboard with current metrics organized by category:

@@ -63,7 +63,7 @@
 - `obsidian tags vault="vault"` — List all tags
 - `obsidian daily:append content="..." vault="vault"` — Append to daily note
 
-**Vault name:** `vault` (at `/Users/ash/RennOS/vault/`)
+**Vault name:** `vault` (at `<repo-root>/vault/`)
 
 **Skills using Obsidian CLI:** `/process-inbox`, `health/journal-prompt`, `growth/goal-setting`, `growth/reflection`
 
@@ -83,6 +83,49 @@
 - `gh issue list` — List issues
 
 **Agents with GitHub access:** @tech-lead, @full-stack-developer, @qa-engineer, @devops-engineer
+
+## Shared Scripts (`scripts/`)
+
+**Purpose:** Reusable Python utilities and standalone tools used across multiple agents and skills. Eliminates duplication.
+
+**Rule:** If 2+ agents need it → `scripts/lib/`. If only 1 skill needs it → keep in that skill's `scripts/` folder.
+
+### `scripts/lib/` — Importable Modules
+| Module | What it provides | Used by |
+|---|---|---|
+| `paths.py` | `REPO_ROOT`, `DATA_DIR`, `VAULT_DIR`, `CEO_MEMORY_DIR` — single source of truth | All skill scripts |
+| `data_scanner.py` | `scan_directory()`, `scan_department()`, `scan_recent_files()`, `freshness_label()` | KPI dashboard, status report, weekly digest, content calendar |
+| `frontmatter.py` | `parse_frontmatter()`, `write_frontmatter()`, `update_frontmatter_field()` | Process-inbox, content agents, vault operations |
+| `formatting.py` | `markdown_table()`, `section_header()`, `summary_block()` | Revenue dashboard, weekly digest, status report |
+
+### `scripts/tools/` — Standalone CLI Tools
+Run via Bash by Tony or any agent with shell access. Example: `python3 scripts/tools/data_freshness.py`
+
+*(Empty — tools will be added here as needed: brand_check, data_freshness, vault_file)*
+
+### `scripts/<dept>/` — Department Scripts
+
+All scripts live under `scripts/` organized by department. Run with `python3 -m scripts.<dept>.<name>` from repo root.
+
+| Script | Run command | What it does | Used by |
+|---|---|---|---|
+| `aggregate_metrics.py` | `python3 -m scripts.analytics.aggregate_metrics` | Scans all `data/` departments, lists files with freshness labels, prints data availability summary | @performance-analyst |
+| `compile_weekly_data.py` | `python3 -m scripts.analytics.compile_weekly_data` | Pulls most recent file from each key department with 3-line preview | @performance-analyst |
+| `project_status_scan.py` | `python3 -m scripts.ops.project_status_scan` | Scans `data/` for files modified in last 7 days + reads active_projects.md | @project-coordinator, Tony |
+| `list_available_content.py` | `python3 -m scripts.social.list_available_content` | Lists files in `data/content/drafts/` and `data/social/` ready for scheduling | @content-scheduler |
+| `revenue_summary.py` | `python3 -m scripts.finance.revenue_summary` | Parses `data/finance/` for revenue files, extracts currency amounts and income streams | @income-tracker |
+| `payment_status.py` | `python3 -m scripts.finance.payment_status` | Scans `data/finance/` for payment/invoice files and their status | @invoice-payments-manager |
+| `outreach_stats.py` | `python3 -m scripts.pr.outreach_stats` | Summarizes PR outreach data from `data/pr/` | @media-outreach-specialist |
+| `subscription_summary.py` | `python3 -m scripts.admin.subscription_summary` | Lists all tracked subscriptions with costs and renewal dates | @subscription-manager |
+| `renewal_check.py` | `python3 -m scripts.admin.renewal_check` | Flags upcoming renewals within a configurable window | @subscription-manager |
+| `merge_calendars.py` | `python3 -m scripts.ops.merge_calendars` | Merges content + schedule calendars into a unified view | @schedule-manager |
+| `deadline_scanner.py` | `python3 -m scripts.ops.deadline_scanner` | Scans for upcoming deadlines across all departments | @project-coordinator |
+| `calendar_conflict_check.py` | `python3 -m scripts.ops.calendar_conflict_check` | Detects scheduling conflicts across merged calendars | @schedule-manager |
+| `scan_content_inventory.py` | `python3 -m scripts.content.scan_content_inventory` | Inventories all content across `data/content/` by type and status | @content-analyst |
+
+**When creating new scripts:** Add them to `scripts/<dept>/`, never inside `.claude/skills/`. Check `scripts/lib/` first — import shared utilities, don't duplicate them.
+
+---
 
 ## Not Yet Connected (Planned)
 

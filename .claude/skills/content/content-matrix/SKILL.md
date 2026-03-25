@@ -19,7 +19,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 ## Steps
 
-1. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/scan_content_inventory.py` to gather current data
+1. Run `python3 -m scripts.content.scan_content_inventory` to gather current data
 2. Read `data/brand/brand-dna.md` and `data/strategy/audience-personas.md`
 3. Read existing `data/content/content-matrix.md` for patterns
 4. Analyze the source content for repurpose potential

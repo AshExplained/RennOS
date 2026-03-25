@@ -20,7 +20,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 1. Read `${CLAUDE_SKILL_DIR}/references/best-practices.md` for digest structure, metric selection, executive summary writing, and formatting standards
 2. Use `${CLAUDE_SKILL_DIR}/template.md` as the output format
-3. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/compile_weekly_data.py` to gather current data
+3. Run `python3 -m scripts.analytics.compile_weekly_data` to gather current data
 4. Read KPI dashboard, top performers, and latest data from all departments
 5. Compile the digest with consistent sections (same format every week):
    - **Week overview** — One-line summary of the week

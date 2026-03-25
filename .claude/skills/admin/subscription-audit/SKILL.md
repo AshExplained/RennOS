@@ -15,7 +15,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 ## Steps
 
-1. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/subscription_summary.py` to gather current data
+1. Run `python3 -m scripts.admin.subscription_summary` to gather current data
 2. Read existing subscription data and previous audits if available
 3. For each subscription, document:
    - Service name

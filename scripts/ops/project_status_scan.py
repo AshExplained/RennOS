@@ -5,54 +5,14 @@ Groups results by department. Also checks .claude/ceo-memory/active_projects.md
 for the active project list.
 """
 
-import os
-from datetime import datetime, timedelta
+import sys
+from datetime import datetime
 from pathlib import Path
+from scripts.lib.paths import DATA_DIR, CEO_MEMORY_DIR, REPO_ROOT
+from scripts.lib.data_scanner import scan_recent_files, list_departments
 
-REPO_ROOT = Path(__file__).resolve().parents[5]
-DATA_DIR = REPO_ROOT / "data"
-ACTIVE_PROJECTS_PATH = REPO_ROOT / ".claude" / "ceo-memory" / "active_projects.md"
+ACTIVE_PROJECTS_PATH = CEO_MEMORY_DIR / "active_projects.md"
 LOOKBACK_DAYS = 7
-
-
-def scan_recent_files(base_dir: Path, days: int) -> dict:
-    """Scan for files modified within the last N days, grouped by department."""
-    cutoff = datetime.now() - timedelta(days=days)
-    departments: dict[str, list[dict]] = {}
-
-    if not base_dir.exists():
-        return departments
-
-    for item in base_dir.rglob("*"):
-        if not item.is_file():
-            continue
-        if item.name in (".gitkeep", ".DS_Store"):
-            continue
-
-        stat = item.stat()
-        mod_time = datetime.fromtimestamp(stat.st_mtime)
-        if mod_time < cutoff:
-            continue
-
-        # Determine department from path
-        rel = item.relative_to(base_dir)
-        parts = rel.parts
-        dept = parts[0] if parts else "(root)"
-
-        departments.setdefault(dept, []).append({
-            "name": item.name,
-            "path": str(item.relative_to(REPO_ROOT)),
-            "modified": mod_time.strftime("%Y-%m-%d %H:%M"),
-            "days_ago": (datetime.now() - mod_time).days,
-        })
-
-    # Sort each department's files by most recent first
-    for dept in departments:
-        departments[dept].sort(key=lambda x: x["days_ago"])
-
-    return departments
-
-
 def read_active_projects(filepath: Path):
     """Read and return active projects file content."""
     if not filepath.exists():
@@ -62,8 +22,6 @@ def read_active_projects(filepath: Path):
         return content if content else None
     except OSError:
         return None
-
-
 def main():
     print("=" * 70)
     print(f"PROJECT STATUS SCAN - Last {LOOKBACK_DAYS} Days")
@@ -95,7 +53,7 @@ def main():
                 print(f"  {'File':<40} {'Modified':<18} {'Age'}")
                 print(f"  {'-'*40} {'-'*18} {'-'*10}")
                 for f in files:
-                    age = f"{f['days_ago']}d ago" if f["days_ago"] > 0 else "today"
+                    age = f"{f['days_old']}d ago" if f["days_old"] > 0 else "today"
                     print(f"  {f['name']:<40} {f['modified']:<18} {age}")
                 print()
 
@@ -115,7 +73,6 @@ def main():
     else:
         print(f"\nSource: {ACTIVE_PROJECTS_PATH.relative_to(REPO_ROOT)}")
         print("-" * 50)
-        # Print content with indentation
         for line in projects_content.split("\n"):
             print(f"  {line}")
 
@@ -130,12 +87,10 @@ def main():
 
     # Check for departments with NO recent activity
     if DATA_DIR.exists():
-        all_depts = sorted([d.name for d in DATA_DIR.iterdir() if d.is_dir() and d.name != ".DS_Store"])
+        all_depts = list_departments()
         inactive = [d for d in all_depts if d not in active_depts]
         if inactive:
             print(f"  Inactive departments (no changes in {LOOKBACK_DAYS}d): {', '.join(inactive)}")
     print(f"{'=' * 70}")
-
-
 if __name__ == "__main__":
     main()

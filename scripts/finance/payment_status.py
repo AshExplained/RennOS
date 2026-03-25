@@ -9,24 +9,18 @@ import os
 import re
 import sys
 from datetime import datetime, timedelta
-
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../.."))
-FINANCE_DIR = os.path.join(REPO_ROOT, "data", "finance")
+from scripts.lib.paths import REPO_ROOT, FINANCE_DIR
 TODAY = datetime.now().date()
 
 DATE_PATTERN = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
 TABLE_ROW_PATTERN = re.compile(r"^\|(.+)\|$")
 SEPARATOR_PATTERN = re.compile(r"^\|[\s\-:]+\|$")
-
-
 def parse_date(date_str):
     """Parse a YYYY-MM-DD date string, return date or None."""
     try:
         return datetime.strptime(date_str.strip(), "%Y-%m-%d").date()
     except (ValueError, AttributeError):
         return None
-
-
 def scan_file_for_invoices(filepath):
     """Scan a markdown file for invoice/payment table rows."""
     invoices = []
@@ -68,8 +62,6 @@ def scan_file_for_invoices(filepath):
             invoices.append(row_data)
 
     return invoices
-
-
 def classify_invoice(row):
     """Classify an invoice row as paid, overdue, or outstanding."""
     status = ""
@@ -97,8 +89,6 @@ def classify_invoice(row):
         if due_date and due_date < TODAY and "paid" not in status:
             return "overdue", due_date
         return "unknown", due_date
-
-
 def scan_for_date_references(filepath):
     """Scan file for any date references and associated context lines."""
     items = []
@@ -120,8 +110,6 @@ def scan_for_date_references(filepath):
                     "line_num": i + 1,
                 })
     return items
-
-
 def main():
     print("=" * 60)
     print("PAYMENT STATUS REPORT")
@@ -249,7 +237,5 @@ def main():
         print(f"\n[!] ACTION NEEDED: {total_overdue} overdue invoice(s) require follow-up.")
 
     print()
-
-
 if __name__ == "__main__":
     main()

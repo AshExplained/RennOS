@@ -20,7 +20,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 
 ## Steps
 
-1. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/list_available_content.py` to gather current data
+1. Run `python3 -m scripts.social.list_available_content` to gather current data
 2. Read current `data/content/content-calendar.md` and `data/strategy/quarterly-roadmap.md`
 3. Check what drafts exist in `data/content/drafts/` and `data/social/` ready to schedule
 4. Map content to the calendar:
