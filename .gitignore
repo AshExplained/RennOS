@@ -10,6 +10,9 @@
 # Claude Code local settings
 .claude/settings.local.json
 
+# Local-only reference docs (not for public repo)
+GITHUB-PUSH.md
+
 # Node
 node_modules/
 

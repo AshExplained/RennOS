@@ -1,6 +1,7 @@
 # RennOS Org Chart
 
 > CEO Agent Routing Guide. Read on every wake-up. Updated when departments go live.
+> **Profile filter:** Before routing, check the user's `Active departments` in `user_profile.md`. If the target department is inactive, suggest activation instead of routing.
 
 ## CEO Agent Skills
 *Skills the CEO agent uses directly — not agents, not delegated.*
@@ -12,7 +13,7 @@
 
 ---
 
-## Dept 1: Strategy & Research — LIVE
+## Dept 1: Strategy & Research — LIVE [Full, B&B]
 *Brand positioning, audience analysis, competitive landscape, long-term roadmap*
 
 | Agent | Model | Skills | When to delegate |
@@ -27,7 +28,7 @@
 
 ---
 
-## Dept 2: Content Creation — LIVE
+## Dept 2: Content Creation — LIVE [Full, B&B]
 *Writing, video production, graphic design, photography*
 
 | Agent | Model | Skills | When to delegate |
@@ -43,7 +44,7 @@
 
 ---
 
-## Dept 3: Social Media Management — LIVE
+## Dept 3: Social Media Management — LIVE [Full, B&B]
 *Platform management, posting schedules, community engagement*
 
 | Agent | Model | Skills | When to delegate |
@@ -58,7 +59,7 @@
 
 ---
 
-## Dept 4: PR & Communications — LIVE
+## Dept 4: PR & Communications — LIVE [Full, B&B]
 *Media outreach, press releases, interview prep, crisis management*
 
 | Agent | Model | Skills | When to delegate |
@@ -73,7 +74,7 @@
 
 ---
 
-## Dept 5: Digital Marketing & Growth — LIVE
+## Dept 5: Digital Marketing & Growth — LIVE [Full, B&B]
 *SEO, paid ads, email marketing, funnel optimization*
 
 | Agent | Model | Skills | When to delegate |
@@ -88,7 +89,7 @@
 
 ---
 
-## Dept 6: Partnerships & Business Development — LIVE
+## Dept 6: Partnerships & Business Development — LIVE [Full, B&B]
 *Sponsorships, collaborations, speaking gigs, licensing, deal negotiation*
 
 | Agent | Model | Skills | When to delegate |
@@ -103,7 +104,7 @@
 
 ---
 
-## Dept 7: Operations & Project Management — LIVE
+## Dept 7: Operations & Project Management — LIVE [Full, B&B, Life]
 *Scheduling, coordination across departments, budgets, vendor management*
 
 | Agent | Model | Skills | When to delegate |
@@ -117,7 +118,7 @@
 
 ---
 
-## Dept 8: Analytics & Reporting — LIVE
+## Dept 8: Analytics & Reporting — LIVE [Full, B&B]
 *Performance tracking, ROI measurement, audience insights, data-driven recommendations*
 
 | Agent | Model | Skills | When to delegate |
@@ -132,7 +133,7 @@
 
 ---
 
-## Dept 9: Legal & Compliance — LIVE
+## Dept 9: Legal & Compliance — LIVE [Full, B&B]
 *Contracts, IP protection, FTC disclosure, privacy compliance*
 
 | Agent | Model | Skills | When to delegate |
@@ -147,7 +148,7 @@
 
 ---
 
-## Dept 11: Finance (Business) — LIVE
+## Dept 11: Finance (Business) — LIVE [Full, B&B, Life]
 *Revenue growth, income tracking, pricing, forecasting, invoicing*
 
 | Agent | Model | Skills | When to delegate |
@@ -162,7 +163,7 @@
 
 ---
 
-## Dept 12: Product — LIVE
+## Dept 12: Product — LIVE [Full, B&B]
 *Product ideation, validation, design, launch, and iteration*
 
 | Agent | Model | Skills | When to delegate |
@@ -177,7 +178,7 @@
 
 ---
 
-## Dept 13: Customer Success — LIVE
+## Dept 13: Customer Success — LIVE [Full, B&B]
 *Customer onboarding, support, retention, community, and feedback*
 
 | Agent | Model | Skills | When to delegate |
@@ -192,7 +193,7 @@
 
 ---
 
-## Dept 14: UI/UX Design — LIVE
+## Dept 14: UI/UX Design — LIVE [Full, B&B]
 *Visual design, user experience, brand visual system, templates*
 
 | Agent | Model | Skills | When to delegate |
@@ -208,7 +209,7 @@
 
 ---
 
-## Dept 15: Health & Wellness — LIVE
+## Dept 15: Health & Wellness — LIVE [Full, Life]
 *Physical fitness, nutrition, mental health, sleep, habits*
 
 | Agent | Model | Skills | When to delegate |
@@ -223,7 +224,7 @@
 
 ---
 
-## Dept 16: Relationships — LIVE
+## Dept 16: Relationships — LIVE [Full, Life]
 *Personal connections, professional networking, CRM, follow-ups*
 
 | Agent | Model | Skills | When to delegate |
@@ -238,7 +239,7 @@
 
 ---
 
-## Dept 17: Personal Growth — LIVE
+## Dept 17: Personal Growth — LIVE [Full, Life]
 *Learning goals, skill development, reading, mindset, reflection*
 
 | Agent | Model | Skills | When to delegate |
@@ -253,7 +254,7 @@
 
 ---
 
-## Dept 18: Life Admin — LIVE
+## Dept 18: Life Admin — LIVE [Full, Life]
 *Personal to-dos, travel, errands, subscriptions, home management*
 
 | Agent | Model | Skills | When to delegate |
@@ -268,7 +269,7 @@
 
 ---
 
-## Dept 19: Personal Finance — LIVE
+## Dept 19: Personal Finance — LIVE [Full, Life]
 *Personal budgeting, savings, investments, expense tracking*
 
 | Agent | Model | Skills | When to delegate |
@@ -284,7 +285,7 @@
 
 ---
 
-## Dept 10: Web & Tech — LIVE
+## Dept 10: Web & Tech — LIVE [Full, B&B]
 *Website management, app development, tooling, automation, and Scrum software delivery*
 
 ### Team A: Web & Tech Operations
@@ -321,7 +322,7 @@
 
 ---
 
-## Dept 20: AI Video Production — LIVE
+## Dept 20: AI Video Production — LIVE [Full, B&B]
 *Product demos, social video, course content, app previews — powered by Stitch + Remotion*
 
 | Agent | Model | Skills | When to delegate |
