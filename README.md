@@ -34,7 +34,7 @@ You can upgrade or switch profiles anytime.
 When new agents, skills, or features are released:
 
 ```bash
-./update.sh
+node update.js
 ```
 
 This pulls the latest system files without touching your personal data (profile, brand DNA, memories, vault).
