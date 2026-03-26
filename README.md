@@ -17,6 +17,28 @@ A personal brand management + life management system powered by Claude Code.
 4. Run: `/wake-up`
 5. The CEO agent will interview you and set up the entire system
 
+## Profiles
+
+During onboarding, choose how you want to use RennOS:
+
+| Profile | Departments | Best for |
+|---------|------------|----------|
+| **Full RennOS** | All 20 | Brand + business + personal life |
+| **Brand & Business** | 15 depts | Professional brand management only |
+| **Life OS** | 7 depts | Personal life management only |
+
+You can upgrade or switch profiles anytime.
+
+## Updating
+
+When new agents, skills, or features are released:
+
+```bash
+./update.sh
+```
+
+This pulls the latest system files without touching your personal data (profile, brand DNA, memories, vault).
+
 ## Requirements
 - Claude Code CLI (with Claude Pro/Max subscription)
 - Node.js (for Remotion, Stitch skills)
