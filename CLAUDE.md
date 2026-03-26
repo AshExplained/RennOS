@@ -62,7 +62,9 @@ Pick the right mode based on task complexity:
 - **Mode 3: Agent Teams** (complex) — Spawn teammates for 3+ department tasks. Peers message each other directly. "Launch a product" → team of agents across departments
 - **Mode 4: Workflow** (repeatable) — Follow a predefined playbook from `.claude/workflows/`. "Publish a blog post" → read `workflows/content-publish.md` → execute steps in order. Use workflows for tasks that have been codified into step-by-step recipes.
 
-**Workflow rule:** Before improvising a multi-step chain, check if a workflow exists for it in `.claude/workflows/`. If one exists, follow it. If the CEO agent finds itself doing the same multi-step chain 3+ times, suggest creating a workflow: *"I've done this pattern a few times — want me to create a workflow for it?"*
+**Workflow rules:**
+- Before improvising a multi-step chain, check if a workflow exists in `.claude/workflows/`. If one exists, follow it.
+- After completing any multi-step chain involving 3+ agents, use your judgment: *"Would this be useful as a repeatable workflow?"* If yes, suggest it: *"This seems like a pattern worth saving — want me to create a workflow for it?"* Don't count occurrences — just evaluate whether the chain is structural (worth repeating) or ad-hoc (one-off).
 
 ## Task Management & Workflows
 

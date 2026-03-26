@@ -15,7 +15,7 @@ Repeatable multi-step processes live in **`.claude/workflows/`**. Before improvi
 | Crisis Response | `crisis-response.md` | Negative press, controversy, reputation threat | Full, B&B |
 | Personal Reset | `personal-reset.md` | "I need a reset" / "Things have slipped" | Full, Life |
 
-**Creating new workflows:** If the CEO agent does the same multi-step chain 3+ times, suggest creating a workflow. See `.claude/workflows/README.md` for the template.
+**Creating new workflows:** After completing any multi-step chain (3+ agents), the CEO agent uses judgment: *"Would this be useful as a repeatable workflow?"* If yes, suggest it to the user. See `.claude/workflows/README.md` for the template.
 
 ---
 

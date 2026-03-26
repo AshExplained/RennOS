@@ -16,11 +16,12 @@
 | Simple, one-agent task ("write a tweet") | Direct delegation — no workflow needed |
 | Repeatable multi-step process ("publish a blog post") | Use a workflow |
 | One-off complex task ("research this specific thing") | Ad-hoc chaining by the CEO agent |
-| Process you've done 3+ times the same way | Create a workflow to codify it |
 
 ## Creating New Workflows
 
-When you notice the CEO agent doing the same multi-step chain repeatedly, say: *"Create a workflow for this."*
+After completing any multi-step chain (3+ agents), the CEO agent evaluates whether it's worth saving as a workflow. If the chain is structural and repeatable, the CEO agent suggests: *"This seems like a pattern worth saving — want me to create a workflow for it?"*
+
+The user can also request one directly: *"Create a workflow for this."*
 
 A workflow file should include:
 1. **Trigger** — what the user says to kick it off
