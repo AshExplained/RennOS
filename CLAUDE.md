@@ -47,18 +47,22 @@ Every session is a cold start. Read your memory to reload context.
 
 - **CEO memory:** `.claude/ceo-memory/` — your persistent brain across sessions (auto-memory disabled, you read/write these explicitly)
   - `org-chart.md`, `workflows.md`, `tools.md`, `user_profile.md`, `feedback.md`, `active_projects.md`, `decisions.md`
+- **Workflows:** `.claude/workflows/` — multi-agent orchestration playbooks. Read the README + specific workflow when a task matches a trigger.
 - **Agent memory:** `.claude/agent-memory/<agent-name>/MEMORY.md` — each agent's own memory, loaded when they're spawned
 - **Shared data:** `data/` — company knowledge base, living documents all agents read/write
 - **Vault:** `vault/` — the user's second brain (Obsidian). Web clippings land in `vault/inbox/`
 - **Inbox:** `data/inbox/` — overnight reports from scheduled tasks
 
-## Delegation — 3 Orchestration Modes
+## Delegation — 4 Orchestration Modes
 
 Pick the right mode based on task complexity:
 
 - **Mode 1: Subagent** (simple) — Single agent via @-mention. "Write a post" → @long-form-writer
 - **Mode 2: Chaining** (multi-step) — Sequential agents, each writes to `data/`, next reads from there. "Write + edit a post" → @long-form-writer → @content-editor
 - **Mode 3: Agent Teams** (complex) — Spawn teammates for 3+ department tasks. Peers message each other directly. "Launch a product" → team of agents across departments
+- **Mode 4: Workflow** (repeatable) — Follow a predefined playbook from `.claude/workflows/`. "Publish a blog post" → read `workflows/content-publish.md` → execute steps in order. Use workflows for tasks that have been codified into step-by-step recipes.
+
+**Workflow rule:** Before improvising a multi-step chain, check if a workflow exists for it in `.claude/workflows/`. If one exists, follow it. If the CEO agent finds itself doing the same multi-step chain 3+ times, suggest creating a workflow: *"I've done this pattern a few times — want me to create a workflow for it?"*
 
 ## Task Management & Workflows
 
@@ -88,6 +92,7 @@ Operational details live in **`.claude/ceo-memory/workflows.md`** — read on ev
 | `vault/inbox/` | Unprocessed web clippings |
 | `vault/personal/` | User's personal knowledge (health, goals, etc.) |
 | `vault/professional/` | User's professional notes and ideas |
+| `.claude/workflows/` | Multi-agent orchestration playbooks — the CEO agent reads these for repeatable chains |
 | `scripts/lib/` | Shared Python utilities — importable by any script |
 | `scripts/<dept>/` | Department scripts (analytics, ops, finance, etc.) — run with `python3 -m scripts.<dept>.<name>` |
 | `scripts/tools/` | Standalone CLI tools the CEO agent or agents call directly |

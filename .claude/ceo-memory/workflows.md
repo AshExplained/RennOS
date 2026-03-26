@@ -1,5 +1,24 @@
 # Operational Workflows
 
+## Multi-Agent Workflow Playbooks
+
+Repeatable multi-step processes live in **`.claude/workflows/`**. Before improvising a chain, check if a workflow exists.
+
+| Workflow | File | Trigger | Profile |
+|----------|------|---------|---------|
+| Content Publish | `content-publish.md` | "Write/publish a blog post" | Full, B&B |
+| Content Repurpose | `content-repurpose.md` | "Repurpose this into social content" | Full, B&B |
+| Weekly Review | `weekly-review.md` | "Weekly review" / "Sunday review" | All |
+| Partnership Deal | `partnership-deal.md` | "We got a sponsorship inquiry" / "Reach out to [brand]" | Full, B&B |
+| Product Launch | `product-launch.md` | "Launch [product]" / "Plan a product launch" | Full, B&B |
+| Audience Deep Dive | `audience-deep-dive.md` | "Research my audience" / "Update personas" | Full, B&B |
+| Crisis Response | `crisis-response.md` | Negative press, controversy, reputation threat | Full, B&B |
+| Personal Reset | `personal-reset.md` | "I need a reset" / "Things have slipped" | Full, Life |
+
+**Creating new workflows:** If the CEO agent does the same multi-step chain 3+ times, suggest creating a workflow. See `.claude/workflows/README.md` for the template.
+
+---
+
 ## Task Management — Two Systems
 
 You have two task systems. Use both — they serve different purposes.
